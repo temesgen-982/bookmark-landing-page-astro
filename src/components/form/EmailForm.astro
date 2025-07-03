@@ -27,36 +27,50 @@
 </form>
 
 <script>
-  const form = document.querySelector("form");
+  // Define a function to contain all the setup logic.
+  function setupEmailForm() {
+    const form = document.querySelector("form");
 
-  if (!form) {
-    console.error("Email form not found in the document.");
-    return;
-  }
-
-  const input = form.querySelector("input");
-  const errorMessages = form.querySelectorAll(".email-error-message");
-  const inputWrapper = form.querySelector(".input-wrapper");
-
-  if (!input || !errorMessages.length || !inputWrapper) {
-    console.error("Required elements not found in the form.");
-    return;
-  }
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const email = input.value.trim();
-    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-    if (!isValid) {
-      inputWrapper.classList.add("bg-primary-400");
-      input.classList.add("bg-red-100");
-      errorMessages.forEach((msg) => msg.classList.remove("hidden"));
-    } else {
-      inputWrapper.classList.remove("bg-primary-400");
-      input.classList.remove("bg-red-100");
-      errorMessages.forEach((msg) => msg.classList.add("hidden"));
+    // This return is now valid because it's inside the setupEmailForm function.
+    if (!form) {
+      console.error("Email form not found in the document.");
+      return;
     }
-  });
+
+    const input = form.querySelector("input") as HTMLInputElement;
+    const errorMessages = form.querySelectorAll(".email-error-message");
+    const inputWrapper = form.querySelector(".input-wrapper");
+
+    // This return is also valid now.
+    if (!input || !errorMessages.length || !inputWrapper) {
+      console.error("Required elements not found in the form.");
+      return;
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = input.value.trim();
+      // Simple but effective email validation regex
+      const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!isValid) {
+        inputWrapper.classList.add("bg-primary-400");
+        input.classList.add(
+          "text-primary-400",
+          "placeholder:text-primary-400/80"
+        );
+        errorMessages.forEach((msg) => msg.classList.remove("hidden"));
+      } else {
+        inputWrapper.classList.remove("bg-primary-400");
+        input.classList.remove(
+          "text-primary-400",
+          "placeholder:text-primary-400/80"
+        );
+        errorMessages.forEach((msg) => msg.classList.add("hidden"));
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", setupEmailForm);
 </script>

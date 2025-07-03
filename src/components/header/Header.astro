@@ -1,0 +1,54 @@
+---
+import DesktopNav from "./DesktopNav.astro";
+import Logo from "./Logo.astro";
+import MobileNav from "./MobileNav.astro";
+
+const { openIcon, closeIcon } = Astro.props;
+---
+
+<header class="flex justify-between py-8 px-5">
+  <Logo />
+
+  <div class="sm:hidden">
+    <button
+      id="nav-toggle"
+      class="relative z-30 cursor-pointer"
+      data-open-icon={openIcon}
+      data-close-icon={closeIcon}
+    >
+      <img src={openIcon} alt="Open menu" />
+    </button>
+  </div>
+
+  <DesktopNav class="hidden sm:flex" />
+  <MobileNav class="sm:hidden" />
+</header>
+
+<script>
+  const menuBtn = document.querySelector("#nav-toggle") as HTMLElement; // to access the data attributes
+  const menu = document.querySelector("#mobile-nav");
+  const logoSVG = document.querySelector("#header-logo");
+
+  let menuOpen = false;
+
+  if (menuBtn && menu && logoSVG) {
+    menuBtn.addEventListener("click", () => {
+      menuOpen = !menuOpen;
+      menu.classList.toggle("hidden");
+
+      const openIconPath = menuBtn.dataset.openIcon;
+      const closeIconPath = menuBtn.dataset.closeIcon;
+
+      const img = menuBtn.querySelector("img");
+      if (img && openIconPath && closeIconPath) {
+        img.setAttribute("src", menuOpen ? closeIconPath : openIconPath);
+      }
+
+      // changing the logo color
+      logoSVG.classList.toggle("menu-open-logo", menuOpen);
+
+      // avoid scrolling when menu is open
+      document.body.style.overflow = menuOpen ? "hidden" : "";
+    });
+  }
+</script>

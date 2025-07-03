@@ -1,0 +1,33 @@
+---
+const { class: className } = Astro.props;
+---
+
+<nav
+  id="mobile-nav"
+  class:list={[
+    className,
+    "hidden flex-col fixed h-screen w-full top-0 left-0 bg-neutral-950/90 pt-8 text-neutral-50 uppercase z-20",
+  ]}
+>
+  <ul class="flex flex-col gap-3 text-center px-5">
+    <li class="border-b border-neutral-50/50 py-3">
+      <a class="text-transparent" href="">.</a>
+    </li>
+    <li class="border-b border-neutral-50/50">
+      <a class="block w-full py-2 hover:text-primary-400" href="">Features</a>
+    </li>
+    <li class="border-b border-neutral-50/50">
+      <a class="block w-full py-2 hover:text-primary-400" href="">Pricing</a>
+    </li>
+    <li class="border-b border-neutral-50/50">
+      <a class="block w-full py-2 hover:text-primary-400" href="">Contact</a>
+    </li>
+    <li class="border-2 rounded-sm mt-2">
+      <a class="block w-full py-2" href="">Login</a>
+    </li>
+  </ul>
+  <div class="flex self-end gap-8 justify-center p-8">
+    <a href=""><img src="assets/images/icon-facebook.svg" alt="Facebook" /></a>
+    <a href=""><img src="assets/images/icon-twitter.svg" alt="Twitter" /></a>
+  </div>
+</nav>

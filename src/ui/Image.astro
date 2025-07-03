@@ -1,0 +1,25 @@
+---
+// For type safety and clarity
+interface Props {
+  image: string;
+  alt: string;
+  bgPosition?: "left" | "right";
+}
+
+// getting the props
+const { image, alt, bgPosition = "right" } = Astro.props;
+
+// classes that are common to both variants (left and right)
+const baseContainerClasses =
+  "relative z-10 after:content-[''] after:absolute after:bg-primary-600 after:h-3/4 after:-z-10";
+
+// variant specific classes (left or right)
+const variantClasses =
+  bgPosition === "left"
+    ? "after:left-0 after:top-1/4 after:w-3/4 after:rounded-r-3xl" // Classes for the 'left' variant
+    : "after:right-0 after:top-1/4 after:w-3/4 after:rounded-l-3xl";
+---
+
+<div class:list="[{baseContainerClasses, variantClasses}]">
+  <img class="px-5" src={image} alt={alt} />
+</div>

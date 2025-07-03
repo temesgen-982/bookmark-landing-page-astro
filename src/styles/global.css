@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-600: hsl(231, 69%, 60%);
+  --color-primary-400: hsl(0, 94%, 66%);
+
+  --color-neutral-50: hsl(0, 0%, 97%);
+  --color-neutral-950: hsl(229, 31%, 21%);
+
+  --font-paragraph: 18px;
+
+  --font-rubik: Rubik;
+  --font-400: 400;
+  --font-500: 500;
+}
+
+@layer utilities {
+  #header-logo.menu-open-logo {
+    --logo-text-color: var(--color-neutral-50);
+    --logo-inner-icon-color: var(--color-neutral-950);
+    --logo-circle-color: var(--color-neutral-50);
+  }
+}
+
+@layer components {
+  .tab-btn {
+    @apply relative border-b border-neutral-950/50 transition-all sm:hover:text-primary-400 cursor-pointer;
+  }
+  .tab-btn.active:after {
+    @apply content-[''] absolute bg-primary-400 w-30 h-1 rounded bottom-0 left-1/2 -translate-x-1/2;
+  }
+  .active-tab {
+    @apply flex flex-col sm:flex-row;
+  }
+  .img-left-after {
+    @apply relative;
+  }
+  .img-left-after:after {
+    @apply content-[''] absolute bg-primary-600 left-0 top-1/5 w-3/4 h-6/7 rounded-r-xl -z-10;
+  }
+  .btn-primary {
+    @apply px-4 py-2 bg-primary-600 text-neutral-50 rounded shadow;
+  }
+  .faq {
+    @apply grid gap-2 border-b border-neutral-950/50 pb-2;
+  }
+  .faq-btn {
+    @apply flex justify-between items-center py-2 sm:hover:text-primary-400;
+  }
+  .faq-icon {
+    @apply transition-transform duration-300 ease-in-out text-primary-600;
+  }
+  .faq-icon.open {
+    @apply rotate-180 text-primary-400;
+  }
+}

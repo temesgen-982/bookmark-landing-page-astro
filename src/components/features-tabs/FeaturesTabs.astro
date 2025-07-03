@@ -1,0 +1,99 @@
+---
+import Image from "../../ui/Image.astro";
+
+const tabs = [
+  {
+    title: "Simple Bookmarking",
+    heading: "Bookmark in one click",
+    description:
+      "Organize your bookmarks however you like. Our simple drag-and-drop interface gives you complete control over how you manage your favourite sites.",
+    image: {
+      src: "assets/images/illustration-features-tab-1.svg",
+      alt: "Bookmark in one click illustration",
+    },
+  },
+  {
+    title: "Speedy Searching",
+    heading: "Intelligent search",
+    description:
+      "Our powerful search feature will help you find saved sites in no time at all. No need to trawl through all of your bookmarks.",
+    image: {
+      src: "assets/images/illustration-features-tab-2.svg",
+      alt: "Intelligent search illustration",
+    },
+  },
+  {
+    title: "Easy Sharing",
+    heading: "Share your bookmarks",
+    description:
+      "Easily share your bookmarks and collections with others. Create a shareable link that you can send at the click of a button.",
+    image: {
+      src: "assets/images/illustration-features-tab-3.svg",
+      alt: "Share your bookmarks illustration",
+    },
+  },
+];
+---
+
+<div>
+  <ul class="px-5 py-8 flex flex-col sm:flex-row justify-center">
+    {
+      tabs.map((tab, index) => (
+        <li class="text-center">
+          <button
+            class:list={["w-full p-3 tab-btn", index == 0 ? "active" : ""]}
+          >
+            {tab.title}
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+  <div id="tabs">
+    {
+      tabs.map((tab, index) => (
+        <div class:list={[index == 0 ? "active-tab" : "hidden"]}>
+          <div class="img-left-after w-full sm:w-1/2">
+            <Image
+              image={tab.image.src}
+              alt={tab.image.alt}
+              bgPosition="left"
+            />
+          </div>
+          <div class="grid sm:content-center gap-3 px-5 py-8 text-center sm:text-left w-full sm:w-1/2">
+            <h3 class="text-2xl">{tab.heading}</h3>
+            <p>{tab.description}</p>
+            <div>
+              <a class="btn-primary" href="">
+                More Info
+              </a>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const tabBtns = document.querySelectorAll(".tab-btn");
+  const tabs = document.querySelectorAll("#tabs > div");
+
+  tabBtns.forEach((tabBtn, index) => {
+    tabBtn.addEventListener("click", () => {
+      // showing the tabs
+      tabs.forEach((tab) => {
+        tab.classList.remove("active-tab");
+        tab.classList.add("hidden");
+      });
+      tabs[index].classList.add("active-tab");
+      tabs[index].classList.remove("hidden");
+
+      // to control the red underline
+      tabBtns.forEach((btn) => {
+        btn.classList.remove("active");
+      });
+      tabBtn.classList.add("active");
+    });
+  });
+</script>

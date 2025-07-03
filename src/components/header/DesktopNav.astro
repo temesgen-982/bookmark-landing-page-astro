@@ -1,0 +1,31 @@
+---
+const { class: className } = Astro.props;
+---
+
+<nav
+  id="nav"
+  class:list={[className, " relative uppercase z-20 flex text-neutral-950"]}
+>
+  <ul class="flex flex-col sm:flex-row gap-3 text-center px-5 sm:px-0">
+    <li class="border-b border-neutral-50/50 py-3 sm:hidden">
+      <a class="text-transparent" href="">.</a>
+    </li>
+    <li class="border-b border-neutral-50/50 sm:border-0">
+      <a class="block w-full py-2 hover:text-primary-400" href="">Features</a>
+    </li>
+    <li class="border-b border-neutral-50/50 sm:border-0">
+      <a class="block w-full py-2 hover:text-primary-400" href="">Pricing</a>
+    </li>
+    <li class="border-b border-neutral-50/50 sm:border-0">
+      <a class="block w-full py-2 hover:text-primary-400" href="">Contact</a>
+    </li>
+    <li
+      class="border-2 rounded-sm mt-2 sm:border-primary-400 sm:hover:bg-transparent sm:mt-0 sm:bg-primary-400"
+    >
+      <a
+        class="block w-full py-2 sm:text-neutral-50 sm:hover:text-primary-400 sm:px-3"
+        href="">Login</a
+      >
+    </li>
+  </ul>
+</nav>

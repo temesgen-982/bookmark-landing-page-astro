@@ -1,0 +1,25 @@
+---
+import Image from "../../ui/Image.astro";
+const { image } = Astro.props;
+---
+
+<div class="md:flex">
+  <div class="grid gap-3 sm:content-center p-5 text-center">
+    <h1 class="text-2xl font-500">A Simple Bookmark Manager</h1>
+    <p>
+      A clean and simple interface to organize your favourite websites. Open a
+      new browser tab and see your sites load instantly. Try it for free.
+    </p>
+    <div class="flex justify-center gap-2">
+      <a
+        class="btn-primary sm:hover:bg-transparent sm:hover:text-primary-600 sm:border sm:border-primary-600"
+        href="#chrome">Get it on Chrome</a
+      >
+      <a
+        class="px-4 py-2 shadow border border-neutral-50 sm:hover:border-neutral-950 sm:hover:text-neutral-950 rounded"
+        href="#firefox">Get it on Firefox</a
+      >
+    </div>
+  </div>
+  <Image image={image} alt="Hero image" />
+</div>

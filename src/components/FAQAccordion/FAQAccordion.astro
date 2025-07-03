@@ -1,0 +1,112 @@
+---
+import FAQHeader from "./FAQHeader.astro";
+
+const faqs = [
+  {
+    question: "What is Bookmark?",
+    answer:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt justo eget ultricies fringilla. Phasellus blandit ipsum quis quam ornare mattis.",
+  },
+  {
+    question: "How can I request a new browser?",
+    answer:
+      "Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet. Vivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdie tVivamus luctus eros aliquet convallis ultricies. Mauris augue massa, ultricies non ligula. Suspendisse imperdiet.",
+  },
+  {
+    question: "Is there a mobile app?",
+    answer:
+      "Sed consectetur quam id neque fermentum accumsan. Praesent luctus vestibulum dolor, ut condimentum urna vulputate eget. Cras in ligula quis est pharetra mattis sit amet pharetra purus. Sed sollicitudin ex et ultricies bibendum.",
+  },
+  {
+    question: "What about other Chromium browsers?",
+    answer:
+      "Integer condimentum ipsum id imperdiet finibus. Vivamus in placerat mi, at euismod dui. Aliquam vitae neque eget nisl gravida pellentesque non ut velit.",
+  },
+];
+---
+
+<div class="grid gap-5 md:max-w-xl md:mx-auto px-5 py-8">
+  <div class="grid gap-3">
+    <FAQHeader />
+
+    {
+      faqs.map((faq, index) => (
+        <div class="faq">
+          {/* Question */}
+          <button
+            class="faq-btn"
+            aria-expanded="false"
+            aria-controls={`faq-${index}`}
+          >
+            {faq.question}
+            <svg
+              class="faq-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="12"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                d="M1 1l8 8 8-8"
+              />
+            </svg>
+          </button>
+          {/* Answer */}
+          <p id={`faq-${index}`} class="hidden">
+            {faq.answer}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+  <a class="btn-primary justify-self-center" href="">More Info</a>
+</div>
+
+<script>
+  const faqBtns = document.querySelectorAll(".faq-btn");
+  const faqAnswers = document.querySelectorAll(".faq > p");
+
+  faqBtns.forEach((faqBtn) => {
+    faqBtn.addEventListener("click", () => {
+      const faqAnswerID = faqBtn.getAttribute("aria-controls");
+
+      // since we are using typescript we gotta stop here if null
+      if (!faqAnswerID) {
+        console.error("Button is missing aria-controls attribute", faqBtn);
+        return;
+      }
+
+      const currentAnswer = document.getElementById(faqAnswerID);
+      const currentIcon = faqBtn.querySelector(".faq-icon");
+
+      // another typescript check
+      if (!currentAnswer || !currentIcon) {
+        console.error(
+          "Could not find the corresponding answer or icon for this button."
+        );
+        return;
+      }
+
+      // if already open, close it
+      if (!currentAnswer.classList.contains("hidden")) {
+        currentAnswer.classList.add("hidden");
+        faqBtn.setAttribute("aria-expanded", "false");
+        currentIcon.classList.remove("open");
+      } else {
+        // if you want multile answers open at once, remove these two loops
+        faqAnswers.forEach((answer) => answer.classList.add("hidden"));
+        faqBtns.forEach((btn) => {
+          btn.setAttribute("aria-expanded", "false");
+          const icon = btn.querySelector(".faq-icon");
+          icon?.classList.remove("open");
+        });
+
+        currentAnswer.classList.remove("hidden");
+        faqBtn.setAttribute("aria-expanded", "true");
+        currentIcon.classList.add("open");
+      }
+    });
+  });
+</script>

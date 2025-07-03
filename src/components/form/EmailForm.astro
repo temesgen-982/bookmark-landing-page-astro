@@ -1,0 +1,62 @@
+<form class="flex flex-col sm:flex-row gap-2 py-3" action="">
+  <div class="p-1 rounded sm:grow input-wrapper">
+    <div class="flex items-center relative">
+      <input
+        class="bg-neutral-50 p-2 rounded outline-0 grow placeholder:text-neutral-600 text-neutral-950"
+        type="text"
+        placeholder="Enter your email address"
+      />
+      <img
+        class="hidden email-error-message absolute right-1 top-2.5"
+        src="assets/images/icon-error.svg"
+        alt="Error"
+      />
+    </div>
+    <p class="hidden email-error-message text-left">
+      Whoops, make sure it's an email
+    </p>
+  </div>
+  <div class="flex p-1 grow sm:grow-0">
+    <button
+      type="submit"
+      class="grow btn-primary bg-primary-400 border border-primary-400 sm:hover:bg-neutral-50 sm:hover:text-primary-400 sm:hover:border-primary-400"
+    >
+      Contact Us
+    </button>
+  </div>
+</form>
+
+<script>
+  const form = document.querySelector("form");
+
+  if (!form) {
+    console.error("Email form not found in the document.");
+    return;
+  }
+
+  const input = form.querySelector("input");
+  const errorMessages = form.querySelectorAll(".email-error-message");
+  const inputWrapper = form.querySelector(".input-wrapper");
+
+  if (!input || !errorMessages.length || !inputWrapper) {
+    console.error("Required elements not found in the form.");
+    return;
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const email = input.value.trim();
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!isValid) {
+      inputWrapper.classList.add("bg-primary-400");
+      input.classList.add("bg-red-100");
+      errorMessages.forEach((msg) => msg.classList.remove("hidden"));
+    } else {
+      inputWrapper.classList.remove("bg-primary-400");
+      input.classList.remove("bg-red-100");
+      errorMessages.forEach((msg) => msg.classList.add("hidden"));
+    }
+  });
+</script>

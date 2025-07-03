@@ -1,16 +1,36 @@
 ---
-
+import "../styles/global.css";
+import Header from "../components/header/Header.astro";
+import Hero from "../components/hero/Hero.astro";
+import Features from "../components/features/Features.astro";
+import FeaturesTabs from "../components/features-tabs/FeaturesTabs.astro";
+import DownloadCards from "../components/download-cards/DownloadCard.astro";
+import FAQAccordion from "../components/FAQAccordion/FAQAccordion.astro";
+import SubscriptionForm from "../components/form/SubscriptionForm.astro";
+import Footer from "../components/footer/Footer.astro";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <main>
+      <Header
+        openIcon="../../public/assets/images/icon-hamburger.svg"
+        closeIcon="../../public/assets/images/icon-close.svg"
+      />
+      <Hero image="../../public/assets/images/illustration-hero.svg" />
+      <Features />
+      <FeaturesTabs />
+      <DownloadCards />
+      <FAQAccordion />
+      <SubscriptionForm />
+      <Footer />
+    </main>
+  </body>
 </html>
